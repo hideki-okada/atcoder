@@ -1,20 +1,25 @@
-import numpy as np
 from sys import stdin
+
+U = 10 ** 6 + 10
+
 
 def main():
     readline = stdin.readline
-    N = int(readline())
-    a = list(map(int, readline().split()))
-    a = np.sort(a)
-    count = 0
-    idxes = np.arange(len(a))
-    while len(idxes):
-        idx = idxes[0]
-        idxes = np.delete(idxes, 0)
-        var = a[idx]
-        if len(np.where(a[idxes] == var)[0]) == 0:
-            count += 1
-        idxes = idxes[np.where(a[idxes] % var != 0)[0]]
-    print(count)
+    _ = int(readline())
+    a = list(map(int, readline().split()))[1:]
+    ret = 0
+    exist_counts = [0] * U
+    for x in a:
+        if exist_counts[x]:
+            exist_counts[x] = 2
+            continue
+        idx = x
+        while idx < U:
+            exist_counts[idx] += 1
+            idx += x
+    for x in a:
+        ret += exist_counts[x] == 1
+    print(ret)
+
 
 main()
