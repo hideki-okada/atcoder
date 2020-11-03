@@ -6,9 +6,9 @@ for i in range(2 ** (n - 1)):
     cur = 0
     for j in range(n - 1):
         if (i >> j) & 1:
-            ope = ope[:-j - cur - 1] + '+' + ope[-j - cur - 1:]
+            ope = ope[:1 + j + cur] + '+' + ope[1 + j + cur:]
         else:
-            ope = ope[:-j - cur - 1] + '-' + ope[-j - cur - 1:]
+            ope = ope[:1 + j + cur] + '-' + ope[1 + j + cur:]
         cur += 1
     if eval(ope) == 7:
         print(ope + '=7')
